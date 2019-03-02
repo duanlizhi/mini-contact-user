@@ -1,0 +1,43 @@
+<view class='mask' wx:if="{{show}}">
+
+  <view class="weui-search-bar">
+    <view class='return' bindtap='hideUsers'>返回</view>
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索人名" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm='confirmInput' />
+        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="weui-icon-search" type="search" size="14"></icon>
+        <view class="weui-search-bar__text">搜索人名</view>
+      </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+
+  <view class='flex '>
+    <scroll-view class="flex1" scroll-y scroll-into-view="{{toView}}" style='height:calc(100vh - 102rpx)'>
+      <block wx:for='{{showList}}' wx:key='id'>
+        <view class='letter-backgroud'>
+          <view class='lh40 fz16 color9e ml10' id='{{item.title}}'>{{item.title}}</view>
+        </view>
+
+        <view class='bgf fz14'>
+          <view class='flex alic borderbe0 ml10 pt15 pb15' wx:for='{{item.list}}' wx:key='i' wx:for-item='n' data-id='{{item.id}}' data-user="{{n}}" bindtap='select'>
+            <image src='{{n.photo}}' class='img mr15'></image>
+            <text>{{n.name}}</text>
+            <text wx:if='{{n.heart=="1"&&n.cue}}' class='posAbs mr15 r10 colorf0'>{{n.cue}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <view class='posFix right0 tc fz12 flex justsa colu' style='top:40%;height:100px;'>
+      <view wx:for='{{nav}}' bindtap='toView' data-item='{{item}}' wx:key='a' bindtouchend='touchend'>
+        <text class="letter-text {{toViewNav == item ? 'letter-actived' : ''}}">{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view>

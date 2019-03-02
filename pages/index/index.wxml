@@ -1,0 +1,7 @@
+<!--index.wxml-->
+
+<view style='padding-top:130px;'>
+  <button bindtap='showUsers' type='warn'>打开自定义联系人页面</button>
+</view>
+
+<contact-users show="{{show}}" list="{{list}}" bindselect="select" bindconfirm="confirm" bindcancle="cancle"></contact-users>
